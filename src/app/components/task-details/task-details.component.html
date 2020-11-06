@@ -1,0 +1,44 @@
+<div style="width: 400px; margin: auto;">
+    <div *ngIf="currentTask" class="edit-form">
+      <h4>Task</h4>
+      <form>
+        <div class="form-group">
+        <label for="status">Status: </label>
+          <select [(ngModel)]="new_status" name="new_status">
+            <option *ngFor="let status of status_map | keyvalue" [value]="status.key" [selected]="currentTask.status">
+                {{status.value}}
+            </option>
+        </select>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description: </label>
+          {{ currentTask.description }}
+        </div>
+  
+        <div class="form-group">
+          <label>User: </label>
+          {{ currentTask.user_id }}
+        </div>
+      </form>
+
+      
+      <button type="submit" class="badge badge-success" (click)="updateTask()">
+        Update
+      </button>
+      
+      <button class="badge badge-danger mr-2" (click)="deleteTask()">
+        Delete
+      </button>
+
+      <div *ngIf="updated">
+        <br />
+        <p>{{ message }} </p>
+      </div>
+    </div>
+  
+    <div *ngIf="!currentTask">
+      <br />
+      <p>Cannot access this Task...</p>
+    </div>
+  </div>
