@@ -1,0 +1,41 @@
+<div class="list row">
+  <div class="col-md-6">
+    <h4>Task List</h4>
+    <ul class="list-group">
+      <li
+        class="list-group-item"
+        *ngFor="let task of tasks; let i = index"
+        [class.active]="i == currentIndex"
+        (click)="setActiveTask(task, i)"
+      >
+        {{ task.description }}
+      </li>
+    </ul>
+  </div>
+  <div class="col-md-6">
+    <div *ngIf="currentTask">
+      <h4>Task</h4>
+      <div>
+        <label><strong>Status:</strong></label> 
+        {{ status[currentTask.status] }}
+      </div>
+      <div>
+        <label><strong>Description:</strong></label>
+        {{ currentTask.description }}
+      </div>
+      <div>
+        <label><strong>User:</strong></label>
+        {{ currentTask.user_id }}
+      </div>
+
+      <a class="badge badge-warning" routerLink="/tasks/{{ currentTask.id }}">
+        Edit
+      </a>
+    </div>
+
+    <div *ngIf="!currentTask">
+      <br />
+      <p>Please click on a Task...</p>
+    </div>
+  </div>
+</div>
