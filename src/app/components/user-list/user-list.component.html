@@ -1,0 +1,45 @@
+<div class="list row">
+    <div class="col-md-6">
+      <h4>User List</h4>
+      <ul class="list-group">
+        <li
+          class="list-group-item"
+          *ngFor="let user of users; let i = index"
+          [class.active]="i == currentIndex"
+          (click)="setActiveUser(user, i)"
+        >
+          {{ user.username }}
+        </li>
+      </ul>
+    </div>
+    <div class="col-md-6">
+      <div *ngIf="currentUser">
+        <h4>User</h4>
+        <div>
+          <label><strong>Username:</strong></label> 
+          {{ currentUser.username }}
+        </div>
+        <div>
+
+        <a class="badge badge-warning" (click)="getTasksByUser(currentUser)">
+          User Tasks
+        </a>
+        <button class="badge badge-danger mr-2" (click)="deleteUser(currentUser)">
+          Delete
+        </button>
+        <div *ngIf="deleted">
+          <br />
+          <p>{{ message }} </p>
+        </div>
+
+        <div class="col-md-6">
+          <ul class="list-group">
+            <li class="list-group-item" *ngFor="let task of tasks; let i = index">
+              {{ task.description }}
+            </li>
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </div>
